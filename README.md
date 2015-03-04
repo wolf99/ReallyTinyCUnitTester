@@ -1,2 +1,2 @@
 # ReallyTinyCUnitTester
-Minimal unit tester for C.
+A minimal unit tester for C.
