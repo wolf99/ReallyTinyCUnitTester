@@ -8,6 +8,7 @@ A test suite is created by coding the tests and a test runner relating to a part
 
 In file test_my_foo.c:
 
+```C
   #include<tester.h>  /* Include the tester */
   #include<myfoo.h>   /* Include the module to be tested. */
     
@@ -28,16 +29,20 @@ In file test_my_foo.c:
     RUN_TEST(unit_test_foo_intialisation); /* run the test we created above. */
     /* If there were more tests to run they would be added here. */
   }
+```
 
 In file test_my_foo.h:
 
+```C
   #ifndef TEST_MY_FOO_H_
   #define TEST_MY_FOO_H_
   void foo_test_runner(void);
   #endif
+```
 
 And in then file containing main() we can call each of the test suites:
 
+```C
   #include<tester.h> /* Include the tester again. */
   #include<test_my_foo.h> /* include our test suite. */
   
@@ -51,5 +56,6 @@ And in then file containing main() we can call each of the test suites:
     /* If there were more suites to run they would be added here. */
     return (0);
   }
+```
 
 Thats it!
