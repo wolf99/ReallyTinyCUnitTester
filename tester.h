@@ -21,24 +21,26 @@
 int suite_fail;	/* Count of tests failed within the current suite. */
 int test_fail;	/* Total count of all failed tests. */
 
-#define OUTPUT_STD_IO_WINDOWS
-//#define OUTPUT_CSV	/* This is shown as an example only and is not yet implemented. */
+/* === SELECT THE OUTPUT INTERFACE TO USE. === */
+#define OUTPUT_STD_IO_WINDOWS	/* Comment this out to use a different output. */
+//#define OUTPUT_CSV	/* Un-comment this to use this output. This is shown as an example only and is not yet implemented. */
 
+/* === IMPLEMENT THE OUTPUT INTERFACES. === */
 #if defined(OUTPUT_STD_IO_WINDOWS)
 	#include <windows.h>
 	HANDLE hConsole;	/* Handle for windows standard output console. */
 	
 	#define OUTPUT_INIT {												\
 							hConsole = GetStdHandle(STD_OUTPUT_HANDLE);	\
-							SetConsoleTextAttribute(hConsole, 7);		\
+							SetConsoleTextAttribute(hConsole, 7);		\	/* Set the test colour to the default. */
 						}												
 
-	#define OUTPUT_SUITE_START(suite_name) 	{printf("\nRunning %s test suite\n", (suite_name));}
+	#define OUTPUT_SUITE_START(suite_name) 	{printf("\nRunning %s test suite\n", (suite_name));}	/* Print out a notification of the start of the suite. */
 	
 	#define OUTPUT_SUITE_PASS(suite_name)	{											\
-												SetConsoleTextAttribute(hConsole, 10);	\
-												printf("Yay, all tests passed!\n");		\
-												SetConsoleTextAttribute(hConsole, 7);	\
+												SetConsoleTextAttribute(hConsole, 10);	/* Set the text colour to green. */ \
+												printf("Yay, all tests passed!\n");		/* Print out a suite passed notification. */ \
+												SetConsoleTextAttribute(hConsole, 7);	/* Set the text colour back to the default. */ \
 											}
 											
 	#define OUTPUT_SUITE_FAIL(suite_name) {}
@@ -47,23 +49,23 @@ int test_fail;	/* Total count of all failed tests. */
 	
 	#define OUTPUT_TEST_FAIL	{												\
 									hConsole = GetStdHandle(STD_OUTPUT_HANDLE);	\
-									SetConsoleTextAttribute(hConsole, 12);		\
-									printf("# %d. %s failed at ln# %d in %s\n", test_fail, __func__, __LINE__, __FILE__);	\
-									SetConsoleTextAttribute(hConsole, 7);		\
+									SetConsoleTextAttribute(hConsole, 12);		/* Set the text colour to red. */ \
+									printf("# %d. %s failed at ln# %d in %s\n", test_fail, __func__, __LINE__, __FILE__);	/* Print out a test failed notification */ \
+									SetConsoleTextAttribute(hConsole, 7);		/* Set the text colour back to the default. */ \
 								}
+								
+#elif defined(OUTPUT_CSV)	/* A second output interface is added here. */
+	FILE * fp;	/* An example handle variable. */
+	#define CSV_PATH	"C:\\Users\\myname\\testresults.csv"	/* An example path object-like macro. */
+	#define OUTPUT_INIT {}	/* This is called by TEST_INIT() which should be called by the user at the start of main(). */
+	#define OUTPUT_SUITE_START(suite_name)	{}	/* This is called at the start of every suite run, before the set_up(). suite_name is the string argument passed to RUN_SUITE. */
+	#define OUTPUT_SUITE_PASS(suite_name)	{}	/* This is called at the end of a failed suite run, after the tear_down(). suite_name is the string argument passed to RUN_SUITE. */
+	#define OUTPUT_SUITE_FAIL(suite_name)	{}	/* This is called at the end of a successful suite run, after the tear_down(). suite_name is the string argument passed to RUN_SUITE. */
+	#define OUTPUT_TEST_PASS	{}	/* This is called at the end of a successful test run, after the tear_down(). */
+	#define OUTPUT_TEST_FAIL	{}	/* This is called at the end of a failed test run, after the tear_down(). */
 #endif
 
-#if defined(OUTPUT_CSV)
-	FILE * fp;
-	#define CSV_PATH	"\0"
-	#define OUTPUT_INIT {}
-	#define OUTPUT_SUITE_START(suite_name)	{}
-	#define OUTPUT_SUITE_PASS(suite_name)	{}
-	#define OUTPUT_SUITE_FAIL(suite_name)	{}
-	#define OUTPUT_TEST_PASS	{}
-	#define OUTPUT_TEST_FAIL	{}
-#endif
-					
+/* === THE TESTER. === */	
 #define INIT_TESTER	{					\
 						suite_fail = 0;	\
 						test_fail = 0;	\
@@ -75,12 +77,12 @@ int test_fail;	/* Total count of all failed tests. */
 											set_up();				\
 											suite_fail = 0;			\
 											suite();				\
+											tear_down();			\
 											if (suite_fail == 0) {	\
 												OUTPUT_SUITE_PASS(suite_name);	\
 											} else {				\
 												OUTPUT_SUITE_FAIL(suite_name);	\
 											}						\
-											tear_down();			\
 										}
 
 #define RUN_TEST(test)	{				\
