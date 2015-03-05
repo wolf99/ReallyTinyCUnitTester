@@ -9,7 +9,7 @@ A test suite is created by coding the tests and a test runner relating to a part
 In file test_my_foo.c:
 
 ```C
-  #include<tester.h>  /* Include the tester */
+  #include<tester.h>  /* Include the tester. */
   #include<myfoo.h>   /* Include the module to be tested. */
     
   static void set_up(void) { } /* This will be run before every unit test. In this example it does nothing. */
@@ -24,10 +24,10 @@ In file test_my_foo.c:
     TEST_TRUE(foo_handle->some_boolean_member); /* Check one of the boolean type members  holds the correct value. */
   }
    
-  /* Lets write a test runner... */
-  void foo_test_runner(void) {
+  /* Lets write a function to run the test suite for the module under test... */
+  void foo_test_suite(void) {
     RUN_TEST(unit_test_foo_intialisation); /* run the test we created above. */
-    /* If there were more tests to run they would be added here. */
+    /* If there were more tests to run on this module they would be added here. */
   }
 ```
 
@@ -36,7 +36,7 @@ In file test_my_foo.h:
 ```C
   #ifndef TEST_MY_FOO_H_
   #define TEST_MY_FOO_H_
-  void foo_test_runner(void);
+  void foo_test_suite(void);  /* Make the test suite function public. */
   #endif
 ```
 
@@ -52,10 +52,25 @@ And in then file containing main() we can call each of the test suites:
   
   int main(int argc, char * argv[]) {
     INIT_TESTER;  /* Initialise the tester. */
-    RUN_SUITE(foo_test_runner, "foo"); /* Run the suite we created using the runner, we also give it a pretty string name, "foo" for the results display. */
+    RUN_SUITE(foo_test_suite, "foo"); /* Run the suite we created using the runner, we also give it a pretty string name, "foo" for the results display. */
     /* If there were more suites to run they would be added here. */
     return (0);
   }
 ```
 
 Thats it!
+
+##Tests
+The current tests available consist of the following:
+
+- TEST_TRUE(test); - Passes if `test` evaluates to `true`
+- TEST_FALSE(test); - Passes if `test` evaluates to `false`
+- TEST_NULL(ptr); - Passes if `ptr` is `NULL`
+- TEST_NOT_NULL(ptr); - Passes if `ptr` is not `NULL`
+- TEST_EQUAL_INT(x, y); - Passes if `x` is equal to `y`
+- TEST_NOT_EQUAL_INT(x, y); - Passes if `x` is not euqal to `y`
+- TETS_EQUAL_INT_TOLERANCE(x, y, z); - Passes if `x` is equal to `y` with a tolerance of ±`z`.
+- 
+##Output
+Currently output is solely to the Windows standard output. This can be changed by adding and selecting an `OUTPUT_*` interface to the output selecter at the top of `tester.h`. for an example, please see the `tester.h` file code and comments
+
