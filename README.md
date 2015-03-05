@@ -69,8 +69,8 @@ The current tests available consist of the following:
 - TEST_NOT_NULL(ptr); - Passes if `ptr` is not `NULL`
 - TEST_EQUAL_INT(x, y); - Passes if `x` is equal to `y`
 - TEST_NOT_EQUAL_INT(x, y); - Passes if `x` is not euqal to `y`
-- TETS_EQUAL_INT_TOLERANCE(x, y, z); - Passes if `x` is equal to `y` with a tolerance of ±`z`.
-- 
+- TEST_EQUAL_INT_TOLERANCE(x, y, z); - Passes if `x` is equal to `y` with a tolerance of ±`z`.
+
 ##Output
 Currently output is solely to the Windows standard output. This can be changed by adding and selecting an `OUTPUT_*` interface to the output selecter at the top of `tester.h`. for an example, please see the `tester.h` file code and comments
 
