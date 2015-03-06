@@ -32,7 +32,7 @@ int test_fail;	/* Total count of all failed tests. */
 	
 	#define OUTPUT_INIT {												\
 							hConsole = GetStdHandle(STD_OUTPUT_HANDLE);	\
-							SetConsoleTextAttribute(hConsole, 7);		\	/* Set the test colour to the default. */
+							SetConsoleTextAttribute(hConsole, 7);	/* Set the test colour to the default. */ \
 						}												
 
 	#define OUTPUT_SUITE_START(suite_name) 	{printf("\nRunning %s test suite\n", (suite_name));}	/* Print out a notification of the start of the suite. */
