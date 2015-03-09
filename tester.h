@@ -20,7 +20,6 @@
 
 int suite_fail;	/* Count of tests failed within the current suite. */
 int test_fail;	/* Total count of all failed tests. */
-static int int_test;
 
 /* === SELECT THE OUTPUT INTERFACE TO USE. === */
 #define OUTPUT_STD_IO_WINDOWS	/* Comment this out to use a different output. */
@@ -107,9 +106,9 @@ static int int_test;
 #define TEST_EQUAL_INT(x, y)		{if ((x) == (y)) 		{ TEST_PASS; } else { TEST_FAIL; }}	
 #define TEST_NOT_EQUAL_INT(x, y)	{if ((x) != (y)) 		{ TEST_PASS; } else { TEST_FAIL; }}	
 
-#define TEST_EQUAL_INT_TOLERANCE(x, y, z)	{					\
-												int_test = x;	\
-												if (((int_test) <= ((y) + (z))) && ((int_test) >= ((y) - (z))))	{	\
+#define TEST_EQUAL_INT_TOLERANCE(x, y, z) 	{	\
+												int _x = (x), _y = (y), _z = (z);	\
+												if ((_x <= (_y + _z)) && (_x >= (_y - _z))) {	\
 													TEST_PASS; 	\
 												} else { 		\
 													TEST_FAIL;	\
