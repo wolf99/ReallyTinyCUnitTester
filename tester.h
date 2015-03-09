@@ -106,6 +106,6 @@ int test_fail;	/* Total count of all failed tests. */
 #define TEST_EQUAL_INT(x, y)		{if ((x) == (y)) 		{ TEST_PASS; } else { TEST_FAIL; }}	
 #define TEST_NOT_EQUAL_INT(x, y)	{if ((x) != (y)) 		{ TEST_PASS; } else { TEST_FAIL; }}	
 
-#define TEST_EQUAL_INT_TOLERANCE(x, y, z) {if (((x) <= ((y) + (z))) || ((x) >= ((y) - (z)))) 	{ TEST_PASS; } else { TEST_FAIL; }}	
+#define TEST_EQUAL_INT_TOLERANCE(x, y, z) {if (((x) <= ((y) + (z))) && ((x) >= ((y) - (z)))) 	{ TEST_PASS; } else { TEST_FAIL; }}	
 
 #endif
