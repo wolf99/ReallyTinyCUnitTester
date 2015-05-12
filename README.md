@@ -72,5 +72,5 @@ The current tests available consist of the following:
 - TEST_EQUAL_INT_TOLERANCE(x, y, z); - Passes if `x` is equal to `y` with a tolerance of ±`z`.
 
 ##Output
-Currently output is solely to the Windows standard output. This can be changed by adding and selecting an `OUTPUT_*` interface to the output selecter at the top of `tester.h`. for an example, please see the `tester.h` file code and comments
+Currently output is solely to the Windows standard output. This can be changed by adding and selecting an `OUTPUT_*` interface to the output selecter at the top of `tester.h`. For an example, please see the `tester.h` file code and comments
 
