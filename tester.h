@@ -113,7 +113,20 @@ int test_fail;	/* Total count of all failed tests. */
 												} else { 		\
 													TEST_FAIL;	\
 												}				\
-											}					\
+											}					
+											
+#define TEST_EQUAL_INT_T(T, x, y) 	{	uintmax_t _x = (x), _y = (y); /* Save values to temp vars */ \
+										if (((x) == (y)) /* Check if values are equal*/ \
+										   && (sizeof(x) == sizeof(T)) /* Check if type sizes match */ \
+										   && (sizeof(y) == sizeof(T)) \
+										   && ((x) = -1, (y) = -1, \
+										        ((((T)(-1)) < 0) && ((x) < 0) && ((y) < 0)) /* Check if type signedness match */ \
+												|| ((((T)(-1)) > 0) && ((x) > 0) && ((y) > 0)))) \
+										{ TEST_PASS; } else { TEST_FAIL; } \
+										(x) = _x, (y) = _y; /* Reset values from temp vars */ \
+									}
+									
+#define TEST_EQUAL_STRING(s1, s2)	{if (!strcmp((s1), (s2)))	{ TEST_PASS; } else { TEST_FAIL; }}
 
 #endif
 
