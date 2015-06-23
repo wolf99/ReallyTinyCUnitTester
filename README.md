@@ -1,12 +1,12 @@
 ﻿# ReallyTinyCUnitTester
 A minimal unit tester for C.
 
-Currently output is to the windows standard output console only (using stdio.h).
+Currently output is to the MS Windows standard output console only (using stdio.h).
 
 ##Example usage
 A test suite is created by coding the tests and a test runner relating to a particular module.
 
-In file test_my_foo.c:
+In file *test_my_foo.c*:
 
 ```C
   #include<tester.h>  /* Include the tester. */
@@ -31,7 +31,7 @@ In file test_my_foo.c:
   }
 ```
 
-In file test_my_foo.h:
+In file *test_my_foo.h*:
 
 ```C
   #ifndef TEST_MY_FOO_H_
@@ -40,7 +40,7 @@ In file test_my_foo.h:
   #endif
 ```
 
-And in then file containing main() we can call each of the test suites:
+And in then file containing `main()` we can call each of the test suites:
 
 ```C
   #include<tester.h> /* Include the tester again. */
@@ -63,16 +63,16 @@ Thats it!
 ##Tests
 The current tests available consist of the following:
 
-- TEST_TRUE(test); - Passes if `test` evaluates to `true`
-- TEST_FALSE(test); - Passes if `test` evaluates to `false`
-- TEST_NULL(ptr); - Passes if `ptr` is `NULL`
-- TEST_NOT_NULL(ptr); - Passes if `ptr` is not `NULL`
-- TEST_EQUAL_INT(x, y); - Passes if `x` is equal to `y`
-- TEST_NOT_EQUAL_INT(x, y); - Passes if `x` is not equal to `y`
-- TEST_EQUAL_INT_TOLERANCE(x, y, z); - Passes if `x` is equal to `y` with a tolerance of ±`z`.
-- TEST_EQUAL_INT_T(T, x, y); - Passes if `x` is equal to `y` and has a type of the same size and sign. Note that `x` and `y`must be modifiable lvalues, `T` should be a whole number type (`int32_t`, `int`, `char`, etc).
-- TEST_EQUAL_STRING(s1, s2); - Passes if string `s1` is equal to `s2` (uses strcmp()from string.h).
+- ```TEST_TRUE(test);``` - Passes if `test` evaluates to `true`
+- ```TEST_FALSE(test);``` - Passes if `test` evaluates to `false`
+- ```TEST_NULL(ptr);``` - Passes if `ptr` is `NULL`
+- ```TEST_NOT_NULL(ptr);``` - Passes if `ptr` is not `NULL`
+- ```TEST_EQUAL_INT(x, y);``` - Passes if `x` is equal to `y`
+- ```TEST_NOT_EQUAL_INT(x, y);``` - Passes if `x` is not equal to `y`
+- ```TEST_EQUAL_INT_TOLERANCE(x, y, z);``` - Passes if `x` is equal to `y` with a tolerance of ±`z`.
+- ```TEST_EQUAL_INT_T(T, x, y);``` - Passes if `x` is equal to `y` and has a type of the same size and sign. Note that `x` and `y`must be modifiable lvalues, `T` should be a whole number type (`int32_t`, `int`, `char`, etc).
+- ```TEST_EQUAL_STRING(s1, s2);``` - Passes if string `s1` is equal to `s2` (uses strcmp()from string.h).
 
 ##Output
-Currently output is solely to the Windows standard output. This can be changed by adding and selecting an `OUTPUT_*` interface to the output selecter at the top of `tester.h`. For an example, please see the `tester.h` file code and comments
+Currently output is solely to the MS Windows standard output. This can be changed by adding and selecting an `OUTPUT_*` interface to the output selecter at the top of `tester.h`. For an example, please see the `tester.h` file code and comments
 
