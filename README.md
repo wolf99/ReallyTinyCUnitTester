@@ -70,7 +70,7 @@ The current tests available consist of the following:
 - TEST_EQUAL_INT(x, y); - Passes if `x` is equal to `y`
 - TEST_NOT_EQUAL_INT(x, y); - Passes if `x` is not equal to `y`
 - TEST_EQUAL_INT_TOLERANCE(x, y, z); - Passes if `x` is equal to `y` with a tolerance of ±`z`.
-- TEST_EQUAL_INT_T(T, x, y); - Passes if `x` is equal to `y` and has a type of the same size and sign. Note that `x` and `y`must be modifiable lvalues.
+- TEST_EQUAL_INT_T(T, x, y); - Passes if `x` is equal to `y` and has a type of the same size and sign. Note that `x` and `y`must be modifiable lvalues, `T` should be a whole number type (`int32_t`, `int`, `char`, etc).
 - TEST_EQUAL_STRING(s1, s2); - Passes if string `s1` is equal to `s2` (uses strcmp()from string.h).
 
 ##Output
