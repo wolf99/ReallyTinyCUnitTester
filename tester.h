@@ -13,7 +13,7 @@
  *  limitations under the License.
  */
 #ifndef TESTER_H_
-#define TESTER_H_
+	#define TESTER_H_
 	#include <stdio.h>
 	#ifdef __cplusplus
 		extern "C" {
