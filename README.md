@@ -1,9 +1,9 @@
-﻿# ReallyTinyCUnitTester
+# ReallyTinyCUnitTester
 A minimal unit tester for C.
 
 Currently output is to the MS Windows standard output console only (using stdio.h).
 
-##Example usage
+## Example usage
 A test suite is created by coding the tests and a test runner relating to a particular module.
 
 In file *test_my_foo.c*:
@@ -60,7 +60,7 @@ And in then file containing `main()` we can call each of the test suites:
 
 Thats it!
 
-##Tests
+## Tests
 The current tests available consist of the following:
 
 - ```TEST_TRUE(test);``` - Passes if `test` evaluates to `true`
@@ -73,6 +73,6 @@ The current tests available consist of the following:
 - ```TEST_EQUAL_INT_T(T, x, y);``` - Passes if `x` is equal to `y` and has a type of the same size and sign. Note that `x` and `y`must be modifiable lvalues, `T` should be a whole number type (`int32_t`, `int`, `char`, etc).
 - ```TEST_EQUAL_STRING(s1, s2);``` - Passes if string `s1` is equal to `s2` (uses strcmp()from string.h).
 
-##Output
+## Output
 Currently output is solely to the MS Windows standard output. This can be changed by adding and selecting an `OUTPUT_*` interface to the output selecter at the top of `tester.h`. For an example, please see the `tester.h` file code and comments
 
